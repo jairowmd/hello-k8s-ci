@@ -1,0 +1,25 @@
+apiVersion: apps/v1 # versao do codigo
+kind: Deployment # recurso a ser criado
+
+metadata: 
+  name: hello-api # nome da aplicacao
+
+spec:
+  replicas: 2 # numero de replicas pods que tem que ficar rodando
+
+  selector: # labels da aplicacao
+    matchLabels:
+      app: hello-api
+
+  template:
+
+    metadata:
+      labels:
+        app: hello-api
+
+    spec:
+
+        containers:
+
+          - name: hello-api
+            image: nginx

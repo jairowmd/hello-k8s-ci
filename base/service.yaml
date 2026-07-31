@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: hello-api-service
+
+spec:
+  selector: # "Procure todos os Pods que tenham essa label."
+    app: hello-api
+
+
+  ports:
+    - port: 80
+      targetPort: 80
+
+  type: ClusterIP # O Service só pode ser acessado de dentro do cluster.
