@@ -1,0 +1,3 @@
+# "Meu ambiente base é formado por este Deployment."
+resources:
+  - deployment.yaml
