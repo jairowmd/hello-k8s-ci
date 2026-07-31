@@ -7,7 +7,7 @@ jobs: # Pense no Job como um funcionário. Uma Pipeline pode ter vários funcion
 
     deploy: # Nome do Job. É apenas um identificador.
 
-        runs-on: ubuntu-lastest # O GitHub cria automaticamente uma máquina Ubuntu.
+        runs-on: ubuntu-latest # O GitHub cria automaticamente uma máquina Ubuntu.
         
         steps:
 
