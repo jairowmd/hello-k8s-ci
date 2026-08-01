@@ -16,11 +16,18 @@ jobs: # Pense no Job como um funcionário. Uma Pipeline pode ter vários funcion
                 - name: Checkout do código
                   uses: actions/checkout@v4
 
-                - name: Mostrar arquivos
-                  run: ls -la
+                - name: Login Docker Hub
+                  uses: docker/login-action@v3
+                  with:
+                    username: ${{secrets.DOCKERHUB_USERNAME}}
+                    password: ${{secrets.DOCKERHUB_TOKEN}}
 
-                - name: mostrar diretorio atual
-                  run: pwd
+                - name: Build da imagem
+                  run: |
+                    docker build -t jairowmd/hello-gitops:v1 .
 
-                - name: Mostrar versao do docker
-                  run: docker --version
+                - name: Mostrar imagens criadas
+                  run: docker images
+
+                - name: Push da imagem
+                  run: docker push jairowmd/hello-gitops:v1
