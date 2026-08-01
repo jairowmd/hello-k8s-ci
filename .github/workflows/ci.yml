@@ -1,11 +1,13 @@
 name: primeiro CI # É apenas o nome da Pipeline.
 
 on:
-    workflow_dispatch: # "Não execute automaticamente."
+    push:
+      branches:
+        - main
 
 jobs: # Pense no Job como um funcionário. Uma Pipeline pode ter vários funcionários trabalhando.
 
-    deploy: # Nome do Job. É apenas um identificador.
+    primeiro-job: # Nome do Job. É apenas um identificador.
 
         runs-on: ubuntu-latest # O GitHub cria automaticamente uma máquina Ubuntu.
         
@@ -17,8 +19,8 @@ jobs: # Pense no Job como um funcionário. Uma Pipeline pode ter vários funcion
                 - name: Mostrar arquivos
                   run: ls -la
 
-                - name: Build da imagem
-                  run: docker build -t hello-api:v1 .
+                - name: mostrar diretorio atual
+                  run: pwd
 
-                - name: Mostrar imagens
-                  run: docker images
+                - name: Mostrar versao do docker
+                  run: docker --version
