@@ -16,6 +16,15 @@ jobs: # Pense no Job como um funcionário. Uma Pipeline pode ter vários funcion
                 - name: Checkout do código
                   uses: actions/checkout@v4
 
+                - name: Gerar tag da imagem
+                  id: vars
+                  run: |
+                    echo "TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+                - name: Mostrar tag
+                  run: |
+                    echo "Tag gerada: ${{ env.TAG }}"
+
                 - name: Login Docker Hub
                   uses: docker/login-action@v3
                   with:
@@ -24,10 +33,10 @@ jobs: # Pense no Job como um funcionário. Uma Pipeline pode ter vários funcion
 
                 - name: Build da imagem
                   run: |
-                    docker build -t jairowmd/hello-gitops:v1 .
+                    docker build -t jairowmd/hello-gitops:${{ env.TAG }} .
 
                 - name: Mostrar imagens criadas
                   run: docker images
 
                 - name: Push da imagem
-                  run: docker push jairowmd/hello-gitops:v1
+                  run: docker push jairowmd/hello-gitops:${{ env.TAG }}
